@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell 
+    BackgroundColor="#FFAD60"
+    x:Class="MauiApp3.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiApp3"
+    Shell.FlyoutBehavior="Disabled"
+    Title="My Task View">
+
+    <Shell.TitleView>
+        <StackLayout Padding="15" Background="#FFAD60">
+            <Label Text="MY TASK APP" HorizontalOptions="Start" FontSize="18" FontFamily="Georgia" FontAttributes="Bold" TextColor="#A66E38" />
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ShellContent 
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent 
+        Title="Detail" 
+        ContentTemplate="{DataTemplate local:DetailPage}" 
+        Route="DetailPage" />
+
+</Shell>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.MainPage"
+             xmlns:viewmodel="clr-namespace:MauiApp3.ViewModel"
+             x:DataType="viewmodel:MainViewModel"
+             BackgroundColor="#FFEEAD">
+
+
+    <Grid BackgroundColor="#FFEEAD" RowDefinitions="100,Auto,*" 
+          ColumnDefinitions="Auto,25*"
+          Padding="10"
+          RowSpacing="15"
+          ColumnSpacing="10">
+
+        <Image Grid.ColumnSpan="2"
+               Source="logo_bot.png" 
+               BackgroundColor="Transparent" 
+               HorizontalOptions="CenterAndExpand"
+               MaximumHeightRequest="100"/>
+
+        <Entry Placeholder="Enter your task here" PlaceholderColor="Maroon"
+               BackgroundColor="Transparent"
+               TextColor="Black" FontAttributes="Bold"
+               HorizontalOptions="StartAndExpand"
+               Grid.Row="1"
+               Grid.Column="1"
+               Grid.ColumnSpan="2"
+               Keyboard="Default"
+               WidthRequest="250"
+               Text="{Binding Text}" />
+
+        <Button Text="Add"
+                BackgroundColor="#A66E38"
+                Command="{Binding AddCommand}"
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                HeightRequest="50"
+                WidthRequest="100" />
+
+        <CollectionView Grid.Row="2" Grid.ColumnSpan="2"
+                ItemsSource="{Binding Items}"
+                SelectionMode="None"
+                BackgroundColor="Transparent" 
+                HorizontalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodel:TaskItem">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                   BackgroundColor="Red"
+                                   CommandParameter="{Binding .}"
+                                   Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid Padding="10">
+                            <Frame BackgroundColor="#96CEB4">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
+                                                  CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <Label Text="{Binding Title}" FontSize="24" />
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
